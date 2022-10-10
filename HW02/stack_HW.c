@@ -156,30 +156,47 @@ int char2int(char op)
 
 
 ////////////// HW2 : complete the following functions ///////////////
+/*
+ * Student: Mikolaj Kuranowski
+ * Student ID: 2020427681
+ * Date: 2022-09-05
+ * Course: Data Structure
+ */
 
 Element stackTop(stackHead* pHead)
 {
+	// Check if there's an element on the stack
 	if (pHead->count < 1) {
 		fputs("stackTop called with empty stack", stderr);
 		abort();
 	}
+
+	// Return the head's value
 	return pHead->top->data;
 };
 
 float evalPostfix(char* postfix)
 {
+	// Create a stack for the operands
 	stackHead* stack = CreateStack();
 
+	// Iterate over characters of the string
 	for (char* p = postfix; *p; ++p) {
+		// Get the current character
 		char c = *p;
 
 		if (isdigit(c)) {
+			// c is a digit - push its value onto the stack
 			push(stack, c - '0');
 		} else {
+			// Otherwise - assume that c is a an operator
+
+			// Pop 2 operands from the stack
 			int n2 = pop(stack);
 			int n1 = pop(stack);
 			int result;
 
+			// Perform the operation
 			switch (c) {
 				case '+':
 					result = n1 + n2;
@@ -198,16 +215,22 @@ float evalPostfix(char* postfix)
 					break;
 
 				default:
+					// Invalid operator - halt the program
 					fprintf(stderr, "invalid operator: %c\n", c);
 					abort();
 			}
 
+			// Push the result onto the stack
 			push(stack, result);
 		}
 	}
 
+	// After all the calculations - pop the result from the stack
 	float result = pop(stack);
+
+	// Deallocate stack resources
 	DestroyStack(stack);
+
 	return result;
 }
 
