@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <malloc.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -174,7 +173,7 @@ float evalPostfix(char* postfix)
 	for (char* p = postfix; *p; ++p) {
 		char c = *p;
 
-		if isdigit(c) {
+		if (isdigit(c)) {
 			push(stack, c - '0');
 		} else {
 			int n2 = pop(stack);
