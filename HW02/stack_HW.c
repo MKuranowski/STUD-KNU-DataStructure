@@ -160,11 +160,55 @@ int char2int(char op)
 
 Element stackTop(stackHead* pHead)
 {
-	// 1) fill this part
+	if (pHead->count < 1) {
+		fputs("stackTop called with empty stack", stderr);
+		abort();
+	}
+	return pHead->top->data;
 };
 
 float evalPostfix(char* postfix)
 {
-	// 2) fill this part
+	stackHead* stack = CreateStack();
+
+	for (char* p = postfix; *p; ++p) {
+		char c = *p;
+
+		if isdigit(c) {
+			push(stack, c - '0');
+		} else {
+			int n2 = pop(stack);
+			int n1 = pop(stack);
+			int result;
+
+			switch (c) {
+				case '+':
+					result = n1 + n2;
+					break;
+
+				case '-':
+					result = n1 - n2;
+					break;
+
+				case '/':
+					result = n1 / n2;
+					break;
+
+				case '*':
+					result = n1 * n2;
+					break;
+
+				default:
+					fprintf(stderr, "invalid operator: %c\n", c);
+					abort();
+			}
+
+			push(stack, result);
+		}
+	}
+
+	float result = pop(stack);
+	DestroyStack(stack);
+	return result;
 }
 
