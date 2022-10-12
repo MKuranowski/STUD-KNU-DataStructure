@@ -159,7 +159,7 @@ int char2int(char op)
 /*
  * Student: Mikolaj Kuranowski
  * Student ID: 2020427681
- * Date: 2022-09-05
+ * Date: 2022-10-12
  * Course: Data Structure
  */
 
