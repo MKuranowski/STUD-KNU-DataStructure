@@ -1,3 +1,9 @@
+/*
+ * Student: Mikolaj Kuranowski
+ * Student ID: 2020427681
+ * Date: 2022-11-01
+ * Course: Data Structure
+ */
 #pragma once
 
 typedef struct _customer {

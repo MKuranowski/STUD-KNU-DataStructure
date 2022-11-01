@@ -1,3 +1,9 @@
+/*
+ * Student: Mikolaj Kuranowski
+ * Student ID: 2020427681
+ * Date: 2022-11-01
+ * Course: Data Structure
+ */
 #include <stdio.h>
 #include <stdlib.h>
 // #include <malloc.h>  // NOTE: This header is not standard and doesn't exist on some OSs
