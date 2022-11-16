@@ -30,27 +30,8 @@ int sort_rule(Element a, Element b) {
 // rand_float returns a random float in the range [0, 10] with (roughly) 1 digit precision
 float rand_float_from_zero_to_ten(void) { return (float)(rand() % 100) / 10.0f; }
 
-// create_random_point allocates new Point and fills its coordinates
-// with random values from rand_float_from_zero_to_ten.
-Element create_random_point(void) {
-    Element pt = malloc(sizeof(Point));
-    *pt = (Point){.x = rand_float_from_zero_to_ten(), .y = rand_float_from_zero_to_ten()};
-    return pt;
-}
-
-// initialize_list_with_10_points creates 10 random points
-// and inserts them into the provided list with `insertionbyRule`.
-// Solves parts 2 and 3.
-void initialize_list_with_10_points(Lhead* list) {
-    for (size_t i = 0; i < 10; ++i) {
-        // Create a new point and insert it into the list, maintaining the order
-        insertionbyRule(list, create_random_point());
-    }
-}
-
 // print_list prints every element in the list to the provided file.
 // Every entry is separated by a newline.
-// Solves part 4.
 void print_list(Lhead* list, FILE* sink) {
     Lnode* node = list->front->link;
     while (node) {
@@ -60,13 +41,24 @@ void print_list(Lhead* list, FILE* sink) {
 }
 
 int main() {
+    // Create the list and set its sorting function
     Lhead* plist = createList();
     setSortRule(plist, sort_rule);
 
-    initialize_list_with_10_points(plist);
+    // Create 10 random points and insert them into the list
+    Point pts[10];
+    for (size_t i = 0; i < 10; ++i) {
+        // (2) Initialize the point
+        pts[i] = (Point){.x = rand_float_from_zero_to_ten(), .y = rand_float_from_zero_to_ten()};
 
+        // (3) Insert it into the list
+        insertionbyRule(plist, pts + i);
+    }
+
+    // (4) Print the list
     print_list(plist, stdout);
 
+    // Deallocate the list and exit the program
     destroyList(plist);
     return 0;
 }
