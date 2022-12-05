@@ -1,3 +1,10 @@
+/*
+ * Student: Mikolaj Kuranowski
+ * Student ID: 2020427681
+ * Date: 2022-12-05
+ * Course: Data Structure
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
